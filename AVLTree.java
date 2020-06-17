@@ -23,11 +23,11 @@ public class AVLTree {
             this(null, null, value, 0);
         }
 
-        public void recalcHeight() {
+        private void recalcHeight() {
             height = Math.max((left == null ? -1 : left.height), (right == null ? -1 : right.height)) + 1;
         }
 
-        public int getHeightDiff() {
+        private int getHeightDiff() {
             return (left == null ? -1 : left.height) - (right == null ? -1 : right.height);
         }
     }
@@ -56,6 +56,10 @@ public class AVLTree {
             }
         }
     }
+    
+    public void add(int value) {
+        root = put(root, value);
+    }
 
     private AVLTreeNode put(AVLTreeNode current, int value) {
         if (current == null) {
@@ -69,10 +73,6 @@ public class AVLTree {
         current.recalcHeight();
         current = balance(current);
         return current;
-    }
-
-    public void add(int value) {
-        root = put(root, value);
     }
 
     private AVLTreeNode balance(AVLTreeNode node) {
